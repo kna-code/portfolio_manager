@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "portfolio-manager"
+version = "0.1.0"
+description = "Investment portfolio management tools."
+authors = ["KNA <you@example.com>"]
+readme = "README.md"
+
+# Production Dependencies
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.2.2"
+
+# Dev/Testing Dependendencies
+[tool.poetry.group.dev.dependencies]  
+pytest = "^8.1.1"
+pytest-sugar = "*"  
+pytest-cov = "*"  
+black = "*"  
+mypy = "*"  
+ruff = "*"  
+isort = "*" 
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+addopts = [
+    "--import-mode=importlib",
+]
