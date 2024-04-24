@@ -8,7 +8,7 @@ def test_vanguard_load_holdings():
 
     assert len(holdings) == 19
     for h in holdings:
-        print(h)
+        #print(h)
         assert h.account_number is not None
         assert h.investment_name is not None
         assert h.symbol is not None
