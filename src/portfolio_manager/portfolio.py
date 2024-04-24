@@ -11,13 +11,16 @@ class Portfolio:
 
         cols = ["AccountName", "AccountNumber", "Category", "TargetPercent", "InvestmentName", "InvestmentSymbol"]
         df = pd.read_csv(filePath, header=0, usecols=cols)
+        df.dropna(inplace=True) # Drop empty rows
+        df["TargetPercent"] = df["TargetPercent"].str.rstrip("%").astype(float)/100 # Convert % to Float
+
         for idx, row in df.iterrows():
 
             allocation = Allocation()
             allocation.account_name = row['AccountName']
             allocation.account_number = row['AccountNumber']
             allocation.category = row['Category']
-            allocation.target_percentage = row['AccountNumber']
+            allocation.target_percentage = row['TargetPercent']
             allocation.investment_name = row['InvestmentName']
             allocation.investment_symbol = row['InvestmentSymbol']
 

@@ -7,11 +7,12 @@ def test_portfolio_load_target_allocations():
     p = Portfolio()
     p.load_target_allocations(filePath)
 
-    assert len(p.target_allocations) == 15
-    for allocation in p.target_allocations:
-        assert allocation.account_name is not None
-        assert allocation.account_number is not None
-        assert allocation.category is not None
-        assert allocation.target_percentage is not None
-        assert allocation.investment_name is not None
-        assert allocation.investment_symbol is not None
+    assert len(p.target_allocations) == 13
+    for a in p.target_allocations:
+        print(a)
+        assert a.account_name is not None
+        assert a.account_number is not None
+        assert a.category is not None
+        assert a.target_percentage > 0
+        assert a.investment_name is not None
+        assert a.investment_symbol is not None
