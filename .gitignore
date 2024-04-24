@@ -1,4 +1,5 @@
 .DS_Store
 .coverage
 dist/
+tests/output
 **/__pycache__/

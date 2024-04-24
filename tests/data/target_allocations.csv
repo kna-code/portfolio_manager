@@ -1,14 +1,14 @@
 AccountName,AccountNumber,Category,TargetPercent,InvestmentName,Symbol
-Account1,1,Equities-US-Large,30.00%,Vanguard S&P 500 ETF,VOO
-Account1,1,Equities-US-Medium,15.00%,Vanguard S&P Mid-Cap 400 ETF,IVOO
-Account1,1,Equites-US-Small,15.00%,Vanguard S&P Small-Cap 600 ETF,VIOO
-Account1,1,Equities-Foreign,15.00%,Vanguard Total Intl Stock ETF,VXUS
-Account1,1,Bonds-US,15.00%,Vanguard Total Bond Market ETF,BND
-Account1,1,Bonds-Foreign,10.00%,Vanguard Total International Bond ETF,BNDX
 Account2,2,Equities-US-Large,30.00%,Vanguard S&P 500 ETF,VOO
 Account2,2,Equities-US-Medium,15.00%,Vanguard S&P Mid-Cap 400 ETF,IVOO
 Account2,2,Equites-US-Small,15.00%,Vanguard S&P Small-Cap 600 ETF,VIOO
 Account2,2,Equities-Foreign,15.00%,Vanguard Total Intl Stock ETF,VXUS
 Account2,2,Bonds-US,15.00%,Vanguard Total Bond Market ETF,BND
 Account2,2,Bonds-Foreign,10.00%,Vanguard Total International Bond ETF,BNDX
-Account3,3,General,100%,Vanguard Wellesley Income Fund Investor Shares,VWINX
+Account3,3,Equities-US-Large,30.00%,Vanguard S&P 500 ETF,VOO
+Account3,3,Equities-US-Medium,15.00%,Vanguard S&P Mid-Cap 400 ETF,IVOO
+Account3,3,Equites-US-Small,15.00%,Vanguard S&P Small-Cap 600 ETF,VIOO
+Account3,3,Equities-Foreign,15.00%,Vanguard Total Intl Stock ETF,VXUS
+Account3,3,Bonds-US,15.00%,Vanguard Total Bond Market ETF,BND
+Account3,3,Bonds-Foreign,10.00%,Vanguard Total International Bond ETF,BNDX
+Account1,1,General,100%,Vanguard Wellesley Income Fund Investor Shares,VWINX

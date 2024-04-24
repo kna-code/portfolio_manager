@@ -12,14 +12,27 @@ class Holding:
 
 
 class Account:
-    def __init__(self, account_number = None):
+    def __init__(self, account_number = None, account_name = None):
         self.account_number = account_number
+        self.account_name = account_name
         self.target_allocations = []
         self.holdings = []
 
     def __str__(self):
          return f"account_number={self.account_number}, target_allocations={len(self.target_allocations)}, holdings={len(self.holdings)}"
 
+    def __eq__(self, other):
+        return self.account_number == other.account_number
+
+    def __lt__(self, other):
+        return self.account_number < other.account_number
+
+    def total_value(self):
+        val = 0
+        for h in self.holdings:
+              val += h.total_value
+
+        return val
 
 class Allocation:
     def __init__(self, account_name=None, account_number=None, category=None, target_percentage=None, investment_name=None, symbol=None):

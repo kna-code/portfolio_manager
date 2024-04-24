@@ -67,3 +67,13 @@ def test_portfolio_calcuate_rebalance_trades():
     assert realloc[2].trade_action == "BUY"
     assert realloc[2].trade_quantity == 0.5
 
+
+def test_portfolio_rebalance():
+    allocations_file_path = "tests/data/target_allocations.csv"
+    vanguard_holdings_file_path = "tests/data/OfxDownload.csv"
+    output_path = "tests/output/test_realloc.csv"
+    
+    p = Portfolio()
+    p.import_target_allocations(allocations_file_path)
+    p.import_holdings("Vanguard", vanguard_holdings_file_path)
+    p.rebalance(output_path)

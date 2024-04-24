@@ -1,6 +1,8 @@
 import pandas as pd
 from portfolio_manager.models import Allocation, Account, Reallocation
 from portfolio_manager.vanguard import Vanguard
+from datetime import datetime
+import os
 
 class Portfolio:
     def __init__(self):
@@ -10,7 +12,7 @@ class Portfolio:
         target_allocations = Portfolio.load_target_allocations(file_path)
         for ta in target_allocations:
             if ta.account_number not in self.accounts:
-                a = Account(account_number=ta.account_number)
+                a = Account(account_number=ta.account_number, account_name=ta.account_name)
                 self.accounts[a.account_number] = a
             
             self.accounts[ta.account_number].target_allocations.append(ta)
@@ -18,14 +20,35 @@ class Portfolio:
     def import_holdings(self, provider, file_path):
         holdings = Portfolio.load_holdings(provider, file_path)
         for h in holdings:
-            if h.acccount_number not in self.accounts:
-                a = Account()
-                a.account_number = h.account_number
+            if h.account_number not in self.accounts:
+                a = Account(account_number=h.account_number)
+                self.accounts[a.account_number] = a
 
-            self.accounts[h.account].holdings.append(h)
+            self.accounts[h.account_number].holdings.append(h)
 
-    def rebalance(self):
-        Pass
+    def rebalance(self, output_file_path):
+
+        # Ensure the output directory exists
+        dir_path = os.path.dirname(output_file_path)
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
+
+        accounts = sorted(self.accounts.values())
+
+        # Generate the reallocation file
+        with open(output_file_path, "w+") as file:
+            file.write(f"Generated {datetime.now()}\n")
+
+            for a in accounts:
+                file.write(f"\n\nAccount: {a.account_number} ({a.account_name}): ${a.total_value():,}\n")
+                file.write(
+                    "Category,InvestmentName,Symbol,TargetPercentage,TargetValue,CurrentPercentage,CurrentValue,DiffPercentage,DiffValue,TradeAction,TradeQuantity\n");
+
+                reallocations = Portfolio.calcuate_rebalance_trades(a)
+                for r in reallocations:
+                    file.write(f"{r.category},{r.investment_name},{r.symbol},{r.target_percentage},{r.target_value},{r.current_percentage},{r.current_value},{r.diff_percentage},{r.diff_value},{r.trade_action},{r.trade_quantity}\n")
+
+                
 
     @staticmethod
     def load_target_allocations(file_path):
@@ -71,7 +94,7 @@ class Portfolio:
             target_allocations_by_symbol[ta.symbol] = ta
 
         if total_allocation_percent != 1:
-            raise Exception("target_allocations to not total to 100%")
+            raise Exception(f"Account {account.account_number}  total target allocations are {total_allocation_percent*100}% instead of 100%")
         
         # Calcuate the total value of all holdings
         total_value = 0
@@ -86,7 +109,7 @@ class Portfolio:
         for ta in account.target_allocations:
 
             if ta.symbol not in holdings_by_symbol:
-                raise Exception("Rebalencing into new Symbols not defined in an existing Holding is not supported because we do not have the share price.")
+                raise Exception(f"Account {ta.account_number} {ta.symbol} exists in the Target Allocations, but not the existing holdings. This is not currently supported because we do not have the share price.")
 
             holding = holdings_by_symbol[ta.symbol]
 
@@ -132,7 +155,7 @@ class Portfolio:
                 realloc.target_value = 0
 
                 realloc.diff_percentage = realloc.current_percentage - realloc.target_percentage
-                realloc.diff_value = realloc.current_value - realloc.trade_value
+                realloc.diff_value = realloc.current_value - realloc.target_value
                 realloc.trade_quantity = -holding.shares
                 
                 if realloc.trade_quantity > 0:
