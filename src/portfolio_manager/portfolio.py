@@ -40,13 +40,23 @@ class Portfolio:
             file.write(f"Generated {datetime.now()}\n")
 
             for a in accounts:
-                file.write(f"\n\nAccount: {a.account_number} ({a.account_name}): ${a.total_value():,}\n")
+                file.write(f"\n\n\"Account: {a.account_number} ({a.account_name}): ${a.total_value():,.2f}\"\n")
                 file.write(
-                    "Category,InvestmentName,Symbol,TargetPercentage,TargetValue,CurrentPercentage,CurrentValue,DiffPercentage,DiffValue,TradeAction,TradeQuantity\n");
+                    "Category,Investment Name,Symbol,Target Percentage,Current Percentage,Diff Percentage,Target Value,Current Value,Diff Value,Trade Action,Trade Quantity\n");
 
                 reallocations = Portfolio.calcuate_rebalance_trades(a)
                 for r in reallocations:
-                    file.write(f"{r.category},{r.investment_name},{r.symbol},{r.target_percentage*100:.2f}%,{r.target_value:.2f},{r.current_percentage*100:.2f}%,{r.current_value:.2f},{r.diff_percentage*100:.2f}%,{r.diff_value:.2f},{r.trade_action},{r.trade_quantity:.2f}\n")
+                    file.write(f"{r.category},"
+                               f"{r.investment_name},"
+                               f"{r.symbol},"
+                               f"{r.target_percentage*100:.2f}%,"
+                               f"{r.current_percentage*100:.2f}%,"
+                               f"{r.diff_percentage*100:.2f}%,"
+                               f"\"${r.target_value:,.2f}\","
+                               f"\"${r.current_value:,.2f}\","                               
+                               f"\"${r.diff_value:,.2f}\","
+                               f"{r.trade_action},"
+                               f"\"{r.trade_quantity:,.2f}\"\n")
 
                 
 
@@ -64,7 +74,7 @@ class Portfolio:
 
             allocation = Allocation()
             allocation.account_name = row['AccountName']
-            allocation.account_number = row['AccountNumber']
+            allocation.account_number = int(row['AccountNumber'])
             allocation.category = row['Category']
             allocation.target_percentage = row['TargetPercent']
             allocation.investment_name = row['InvestmentName']

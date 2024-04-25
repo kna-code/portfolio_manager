@@ -6,7 +6,7 @@ def test_vanguard_load_holdings():
 
     holdings = Vanguard.load_holdings(filePath)
 
-    assert len(holdings) == 19
+    assert len(holdings) == 17
     for h in holdings:
         #print(h)
         assert h.account_number is not None

@@ -23,7 +23,7 @@ class Vanguard:
         for idx, row in df.iterrows():
 
             holding = Holding()
-            holding.account_number = row['Account Number']
+            holding.account_number = int(row['Account Number'])
             holding.investment_name = row['Investment Name']
             holding.symbol = row['Symbol']
             holding.shares = row['Shares']
