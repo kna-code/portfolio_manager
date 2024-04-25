@@ -21,6 +21,6 @@ if __name__ == "__main__":
     args = get_args()
 
     p = Portfolio()
-    p.import_target_allocations(args["targets_csv"])
-    p.import_holdings("Vanguard", args["vanguard_csv"])
-    p.rebalance(args["output"])
+    p.import_target_allocations(args.targets_csv)
+    p.import_holdings("Vanguard", args.vanguard_csv)
+    p.rebalance(args.output)

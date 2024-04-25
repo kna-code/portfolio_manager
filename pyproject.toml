@@ -5,6 +5,11 @@ description = "Investment portfolio management tools."
 authors = ["KNA <you@example.com>"]
 readme = "README.md"
 
+packages = [
+    { include = "portfolio_manager" },
+]
+
+
 # Production Dependencies
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -31,3 +36,6 @@ pythonpath = "src"
 addopts = [
     "--import-mode=importlib",
 ]
+
+[tool.poetry.scripts]
+reballance = "src.portfolio_manager.portfolio_manager:reballance"

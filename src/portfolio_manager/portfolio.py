@@ -46,7 +46,7 @@ class Portfolio:
 
                 reallocations = Portfolio.calcuate_rebalance_trades(a)
                 for r in reallocations:
-                    file.write(f"{r.category},{r.investment_name},{r.symbol},{r.target_percentage},{r.target_value},{r.current_percentage},{r.current_value},{r.diff_percentage},{r.diff_value},{r.trade_action},{r.trade_quantity}\n")
+                    file.write(f"{r.category},{r.investment_name},{r.symbol},{r.target_percentage*100:.2f}%,{r.target_value:.2f},{r.current_percentage*100:.2f}%,{r.current_value:.2f},{r.diff_percentage*100:.2f}%,{r.diff_value:.2f},{r.trade_action},{r.trade_quantity:.2f}\n")
 
                 
 
